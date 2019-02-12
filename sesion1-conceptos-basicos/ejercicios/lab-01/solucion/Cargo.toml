@@ -1,0 +1,8 @@
+[package]
+name = "club-estudio-rust"
+version = "0.1.0"
+authors = ["Ozz <wdonet@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+ferris-says = "0.1"
