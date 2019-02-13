@@ -133,6 +133,7 @@ Representan un valor simple de 4 posibles: entero, punto flotante, logico y cara
 
 #### Entero
 Se define con una `i` (con signo +/-) o `u` (sin signo) seguido del numero de bits de espacio en memoria requeridos. Cada variante con signo puede almancenar numeros en el rango de `-2^(n-1)` a `2^(n-1) - 1` y las variantes sin signo en un rango de `0` a `2^(n) - 1`.
+
 |  Lenght | Signed | Unsigned |
 |:-------:|:------:|:--------:|
 | 8-bit   | i8     | u8       |
