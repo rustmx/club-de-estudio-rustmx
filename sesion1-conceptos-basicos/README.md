@@ -6,7 +6,16 @@ class: center, middle
 
 ---
 
-# Instalación de Rust y requisitos
+## Agenda
+
+- Instalación de Rust y requisitos
+- Conceptos Basicos
+- Tipos de datos
+- Estructuras de control
+
+---
+
+## Instalación de Rust y requisitos
 
 La forma recomendada para instalar *Rust* es hacerlo mediante _rustup_.
 ```
@@ -94,7 +103,7 @@ Otra ventaja sobre `mut` es que con _Shadowing_ el tipo de dato en dicha transfo
   let spaces = spaces.len();
   println!("Total spaces {}", spaces);
   let mut number = "four";
-  number = 5; //compilation error
+  number = 5; // error en tiempo de compilacion
 ```
 [Intentalo](https://repl.it/repls/DeeppinkOrdinaryCertifications)
 
@@ -112,11 +121,48 @@ Las constantes son validas por el tiempo en que se ejecuta el programa y dentro 
 ### Result
 Muchas funciones de I/O devuelven un tipo de dato (enum) [Result](https://doc.rust-lang.org/nightly/std/result/enum.Result.html) que se usa para retornar y propagar errores.  Sus variantes son Ok para cuando la operacion es exitosa y Err representando un error y su valor.
 
-`Result` es una buena solucion para recuperarse de errores que usan la macro [panic!](https://doc.rust-lang.org/std/macro.panic.html).
+`Result` es una buena solucion para recuperarse de errores que usan la macro [panic!](https://doc.rust-lang.org/std/macro.panic.html). **Panic** es el termino que Rust usa cuando un programa termina con error.
 
 ---
 
 ## Tipos de datos
+Rust debe saber el tipo de datos de cada variable en tiempo de compilacion para saber como operar.  Sin embargo puede _inferir_ el tipo basado en el valor y en como se utiliza.
+
+### Tipos Escalares
+Representan un valor simple de 4 posibles: entero, punto flotante, logico y caracter.
+
+#### Entero
+Se define con una `i` (con signo +/-) o `u` (sin signo) seguido del numero de bits de espacio en memoria requeridos. Cada variante con signo puede almancenar numeros en el rango de `-2^(n-1)` a `2^(n-1) - 1` y las variantes sin signo en un rango de `0` a `2^(n) - 1`.
+|  Lenght | Signed | Unsigned |
+|:-------:|:------:|:--------:|
+| 8-bit   | i8     | u8       |
+| 16-bit  | i16    | u16      |
+| 32-bit  | i32 (default)    | u32      |
+| 64-bit  | i64    | u64      |
+| 128-bit | i128   | u128     |
+| arquitectura | isize | usize |
+
+Si quieres depender de la arquitectura de la computadora usa `isize` y `usize`.  Su tamanño es de de 64 bits en una arquitectura de de 64-bits por ejemplo.  Estos tipos se usan generalmente para indexar algun tipo de coleccion.
+
+Si llegas al limite del rango de un tipo, por ejemplo una variable tipo `u8` con valor `255` y quieras cambiarlo a `256` - esto se llama **Integer Overflow** - el cual provoca que el compilador cause una señal de panico en modo debug.  De otro modo, Rust hace algo llamado **two's complement wrapping** que significa hacer el `256` en `0`, el `257` en `1` y asi sucesivamente.
+
+#### Punto flotante
+Solo existen dos siguiendo la misma nomenclatura que para enteros: `f32` y `f64` (default por ser mas preciso y casi de la misma velocidad).
+
+> _Note:_ Las operaciones matematicas clasicas son suma (+), resta (-), multiplicacion (*), division (/) y residuo (%)
+
+#### Logico
+Se usa la palabra reservada `bool` y es de tamaño de un bit. Se puede especificar con las palabras `true` y `false` como valores.
+```
+let t = true;
+let f: bool = false;
+```
+
+#### Caracter
+Este es especificado con un caracter en comillas simples `'😻'`.  Representa un valor escalar Unicode por lo que puede representar mas caracteres del codigo ASCII como caracteres Chinos, Japoneses, Koreanos o emojis.  Su rango de valores va de `U+0000` a `U+D7FF` y `U+E000` a `U+10FFFF`.
+
+### Tipos Compuestos
+
 
 ---
 
