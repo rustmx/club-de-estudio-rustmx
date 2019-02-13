@@ -8,14 +8,15 @@ class: center, middle
 
 ## Agenda
 
-- Instalación de Rust y requisitos
-- Conceptos Basicos
-- Tipos de datos
-- Estructuras de control
+- [Instalación](#instalacion)
+- [Conceptos Basicos](#conceptos-basicos)
+- [Tipos de datos](#tipos-de-datos)
+- [Estructuras de control](#estructuras-de-control)
+- [Ejercicios](ejercicios/lab-01)
 
 ---
 
-## Instalación de Rust y requisitos
+## Instalación
 
 La forma recomendada para instalar *Rust* es hacerlo mediante _rustup_.
 ```
@@ -29,7 +30,7 @@ Cabe señalar que el método antes mencionado es solo para sistemas *Nix. Si tú
 tienes Windows debes seguir las instrucciones listadas en la siguiente página:
 https://forge.rust-lang.org/other-installation-methods.html
 
-Esta sesion asume que se ha instalado Rust, Cargo y otras herramientas mencionadas en el [Get-Started](https://www.rust-lang.org/learn/get-started) de la pagina oficial de Rust.
+Tambien es recomendable que sigas las instrucciones del [Get-Started](https://www.rust-lang.org/learn/get-started) en la pagina oficial para tener Rust, Cargo y otras herramientas utiles.
 
 ---
 
@@ -91,7 +92,7 @@ Existe una forma de declarar una variable nueva con el mismo nombre y usando el 
   let val = val + 5;
   println!("The value is {}", val);
 ```
-[Intentalo](https://repl.it/repls/FrivolousSnoopyVirtualmemory)
+[Intentalo](https://repl.it/@wdonet/rust-shadowing)
 
 El programa primero enlaza `val` al valor `4` y luego emerge de su sombra al hacer `let val = val ...` tomando el valor original y agregando `5`.
 
@@ -105,7 +106,7 @@ Otra ventaja sobre `mut` es que con _Shadowing_ el tipo de dato en dicha transfo
   let mut number = "four";
   number = 5; // error en tiempo de compilacion
 ```
-[Intentalo](https://repl.it/repls/DeeppinkOrdinaryCertifications)
+[Intentalo](https://repl.it/@wdonet/shadowing-mut)
 
 ### Constantes
 A diferencia de las variables, las constantes _siempre son no mutables_ y deben ser anotadas con su tipo implicitamente.  Se definen solamente a traves de expresiones de constante como abajo y no como resultado de una llamada a una funcion, esto es, que no podrian ser definidas en tiempo de ejecucion.
@@ -163,11 +164,47 @@ let f: bool = false;
 Este es especificado con un caracter en comillas simples `'😻'`.  Representa un valor escalar Unicode por lo que puede representar mas caracteres del codigo ASCII como caracteres Chinos, Japoneses, Koreanos o emojis.  Su rango de valores va de `U+0000` a `U+D7FF` y `U+E000` a `U+10FFFF`.
 
 ### Tipos Compuestos
+Rust cuenta con dos tipos de dato compuestos y primitivos que pueden agrupar multiples valores.
 
+#### Tuplas
+Son una forma de agrupar valores de tipos de dato distintos.  Son de tamaño fijo, se crean escribiendo una lista de valores separados por coma y entre parentesis.  Cada posicion tiene un tipo de dato.  Para acceder a los valores de una tupla se puede usar **pattern matching** a traves de `destructuring` o con el nombre de la variable seguido de `.` y el indice del elemento (comenzando en cero).
+```
+  let tupla = (500, 9.3, 'z', "cadena");
+  println!("Tupla {:?}", tupla);
+  let (entero, flotante, caracter, cadena) = tupla;
+  println!("entero : {}", entero);
+  println!("flotante : {}", flotante);
+  println!("caracter : {}", caracter);
+  println!("cadena : {}", cadena);
+
+  let dos_enteros: (i32, u8) = (500, 1);
+  println!("Dos enteros con indice : {} y {}", dos_enteros.0, dos_enteros.1);
+```
+[Intentalo](https://repl.it/@wdonet/rust-tuples)
+
+#### Arreglos
+En este caso todos los elementos deben ser del mismo tipo.  Son de tamaño fijo, sus valores tambien se separan por comas dentro de corchetes.  Son utiles cuando se quiere tener los datos en el `Stack` en lugar del `Heap`.  Un `vector` es una coleccion similar que puede crecer en tamaño.
+
+Para indicar el tipo de un array se usan corchetes con dos elementos dentro, el primero es el tipo de dato para los elementos y separado por un `;` le sigue el total de elementos en el arreglo. Si esto no se indica, todo es inferido.
+
+Para acceder a elementos especificos se usan `[]` con el indice del elemento. Indice comienza en cero.
+```
+  let a = ["second", "minute", "hour", "day", "month", "year"];
+  println!("Arreglo a {:?}", a);
+  let b:[u8; 3] = [10, 20, 30];
+  println!("Elemento b[0] {}", b[0]);
+  println!("Elemento b[1] {}", b[1]);
+  println!("Elemento b[2] {}", b[2]);
+```
+[Intentalo](https://repl.it/@wdonet/rust-arrays)
 
 ---
 
 ## Estructuras de control
+
+### if
+
+### Ciclos
 
 ---
 
