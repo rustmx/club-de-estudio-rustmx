@@ -232,6 +232,42 @@ Como `if` es una expresion, tambien se puede utilizar a la derecha de `let` como
 Pero usar multiples `else-if` puede hacer el codigo ilegible, para esos casos se puede usar `match`.
 
 ### Ciclos
+El proposito es ejecutar un bloque de codigo mas de una vez.
+
+| `loop` | `while` | `for` |
+|:-------:|:------:|:--------:|
+| Ejecuta el codigo por siempre o hasta que se termine manualmente (`^C`). | Ejecuta el codigo siempre que la condicion se cumpla. | Usual para recorrer elementos de un tipo de dato compuesto como un arreglo o tupla.  Tambien se suele usar con rangos `(1..4)`. |
+
+Ejemplos:
+```
+  /* Loop */
+  let mut counter = 10;
+  let status = loop {
+    if counter == 0 {
+      break "Terminado";
+    }
+    println!("Numero {}", counter);
+    counter -= 1;
+  };
+  println!("=> {}", status);
+
+  /* While */
+  counter = counter + 5;
+  while counter !=0 {
+    println!("Numero {}", counter);
+    counter -= 1;
+  }
+  println!("While terminado");
+
+  /* For */
+  let elements = [3, 2, 1];
+  for element in elements.iter() {
+    println!("Numero {}", element);
+  }
+  println!("For terminado");
+```
+
+_**Note : ** Se puede usar `break` en cualquiera para dar por terminada la ejecucion del ciclo._
 
 [Intentalo](https://repl.it/@wdonet/rust-control-loops)
 
