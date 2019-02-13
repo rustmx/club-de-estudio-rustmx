@@ -8,7 +8,7 @@ class: center, middle
 
 ## Agenda
 
-- [Instalación](#instalacion)
+- [Instalación](#instalación)
 - [Conceptos Basicos](#conceptos-basicos)
 - [Tipos de datos](#tipos-de-datos)
 - [Estructuras de control](#estructuras-de-control)
@@ -109,7 +109,7 @@ Otra ventaja sobre `mut` es que con _Shadowing_ el tipo de dato en dicha transfo
 [Intentalo](https://repl.it/@wdonet/shadowing-mut)
 
 ### Constantes
-A diferencia de las variables, las constantes _siempre son no mutables_ y deben ser anotadas con su tipo implicitamente.  Se definen solamente a traves de expresiones de constante como abajo y no como resultado de una llamada a una funcion, esto es, que no podrian ser definidas en tiempo de ejecucion.
+A diferencia de las variables, las constantes _siempre son no mutables_ y deben ser anotadas con su tipo explicitamente.  Se definen solamente a traves de expresiones de constante como abajo y no como resultado de una llamada a una funcion, esto es, que no podrian ser definidas en tiempo de ejecucion.
 
 ```
 const MAX_RESULTS_PER_REQUEST: u32 = 100_000;
@@ -201,12 +201,42 @@ Para acceder a elementos especificos se usan `[]` con el indice del elemento. In
 ---
 
 ## Estructuras de control
+El objetivo de estas es decidir que codigo ejecutar y si hacerlo repetidamente mientras una serie de condiciones se cumplen.
 
-### if
+### Expresion `if`
+Si la condicion _(debe ser logica o de tipo `bool`)_ se cumple la condicion despues del `if`, ejecuta el bloque de codigo encerrado entre `{}`, de lo contrario ejecuta el bloque de codigo despues de `else`.
+
+```
+  let grados = 10;
+  if grados > 30 {
+    println!("Apagar estufa en 1 minuto!");
+  } else if grados < 5 {
+    println!("Comenzando");
+  } else {
+    println!("Temperatura {}", grados);
+  }
+```
+
+Como `if` es una expresion, tambien se puede utilizar a la derecha de `let` como un valor.  _En este caso ambos valores deben ser del mismo tipo de dato._
+```
+  let estatus = if grados > 5 {
+    "caliente"
+  } else {
+    "frio"
+  };
+  println!("Estado {}", estatus);
+```
+[Intentalo](https://repl.it/@wdonet/rust-control-if)
+
+
+Pero usar multiples `else-if` puede hacer el codigo ilegible, para esos casos se puede usar `match`.
 
 ### Ciclos
 
+[Intentalo](https://repl.it/@wdonet/rust-control-loops)
+
 ---
 
-
 _Puedes acceder a mas documentos directamente en tu local ejecutando `rustup doc`_
+
+Ahora vamos al primer [laboratorio](ejercicios/lab-01)
