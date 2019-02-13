@@ -9,8 +9,9 @@ class: center, middle
 # Instalación de Rust y requisitos
 
 La forma recomendada para instalar *Rust* es hacerlo mediante _rustup_.
-
->>> `curl https://sh.rustup.rs -sSf | sh`
+```
+curl https://sh.rustup.rs -sSf | sh
+```
 
 _rustup_ es la herramienta para manejar Rust y el proceso antes realizado instala
 también _rustc_ y _cargo_.
@@ -76,14 +77,26 @@ La linea 3 en el codigo arriba causa un error en tiempo de compilacion por trata
 
 #### Shadowing
 Existe una forma de declarar una variable nueva con el mismo nombre y usando el mismo valor que una previa.  De esta manera se dice que la nueva variable emerge de la sombra de la primera (shadows).
-<iframe height="400px" width="100%" src="https://repl.it/repls/FrivolousSnoopyVirtualmemory?lite=true" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+```
+  let val = 4;
+  let val = val + 5;
+  println!("The value is {}", val);
+```
+[Intentalo](https://repl.it/repls/FrivolousSnoopyVirtualmemory)
 
 El programa primero enlaza `val` al valor `4` y luego emerge de su sombra al hacer `let val = val ...` tomando el valor original y agregando `5`.
 
 Con `mut` el compilador sabe que una variable sera mutable en todo su ciclo de vida.  _Shadowing_ puede definir una serie de transformaciones sobre los valores de la variable pero al final de estas se mantiene como no mutable.
 
 Otra ventaja sobre `mut` es que con _Shadowing_ el tipo de dato en dicha transformacion.
-<iframe height="400px" width="100%" src="https://repl.it/repls/DeeppinkOrdinaryCertifications?lite=true" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+```
+  let spaces = "   ";
+  let spaces = spaces.len();
+  println!("Total spaces {}", spaces);
+  let mut number = "four";
+  number = 5; //compilation error
+```
+[Intentalo](https://repl.it/repls/DeeppinkOrdinaryCertifications)
 
 ### Constantes
 A diferencia de las variables, las constantes _siempre son no mutables_ y deben ser anotadas con su tipo implicitamente.  Se definen solamente a traves de expresiones de constante como abajo y no como resultado de una llamada a una funcion, esto es, que no podrian ser definidas en tiempo de ejecucion.
