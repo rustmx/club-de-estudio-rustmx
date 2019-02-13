@@ -8,10 +8,32 @@ class: center, middle
 
 # Agenda
 
-1. Introduction
-2. Deep-dive
+1. Instalación de Rust
+2.
 3. ...
 
 ---
 
-# Introduction
+# Instalación de Rust
+
+La forma recomendada para instalar *Rust* es hacerlo mediante _rustup_.
+
+>>>```curl https://sh.rustup.rs -sSf | sh```
+
+_rustup_ es la herramienta para manejar Rust y el proceso antes realizado instala
+también _rustc_ y _cargo_.
+
+Cabe señalar que el método antes mencionado es solo para sistemas *Nix. Si tú
+tienes Windows debes seguir las instrucciones listadas en la siguiente página:
+https://forge.rust-lang.org/other-installation-methods.html
+
+---
+
+class: center, middle
+
+# Conceptos básicos
+
+---
+
+## Tipos de datos
+
