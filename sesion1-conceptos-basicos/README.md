@@ -10,7 +10,7 @@ class: center, middle
 
 La forma recomendada para instalar *Rust* es hacerlo mediante _rustup_.
 
->>>```curl https://sh.rustup.rs -sSf | sh```
+>>> `curl https://sh.rustup.rs -sSf | sh`
 
 _rustup_ es la herramienta para manejar Rust y el proceso antes realizado instala
 también _rustc_ y _cargo_.
@@ -36,7 +36,7 @@ Como un repaso vale la pena mencionar que **Cargo** es una herramienta construir
 - Generar un proyecto nuevo `cargo new {nombre-proyecto}` 
 ```
 nombre-proyecto
-|- Cargo.toml <- el manifiesto donde se indica metadata y dependencias [(leer mas)](https://github.com/toml-lang/toml)
+|- Cargo.toml <- el manifiesto donde se indica metadata y dependencias - https://github.com/toml-lang/toml
 |- src
   |- main.rs  <- el codigo
 ```
@@ -60,16 +60,41 @@ Luego para usar en el codigo con `use` seguido de `::` para indicar la funcion e
 use ferris_says::say;
 ```
 
-_Cuando se importan nuevos crates a un proyecto hay que compilar el proyecto nuevamente._
+_Cuando se importan nuevos crates a un proyecto hay que compilarlo nuevamente._
 
 ### Variables
 Las variables son referencias a los datos en memoria.  Se usa `let` para su creacion.  Las variables no mutan por defecto, para cambiar esto se usa `mut`.
 ```
 let foo = 5; // no mutable
 let mut bar = String::new(); // mutable
+foo = 6; // error en tiempo de compilacion
 ```
 
-La sintaxis `::new` indica que `new` es una funcion asociada al tipo de dato `String` que se define en el tipo de dato y esta disponible para todas las instancias de este.  En este caso, `new` es una funcion comun en muchos tipos de dato usada para crear nuevos valores. 
+La sintaxis `::new` indica que `new` es una funcion asociada al tipo de dato `String` que se define en el tipo de dato y esta disponible para todas las instancias de este.  En este caso, `new` es una funcion comun en muchos tipos de dato usada para crear nuevos valores.
+
+La linea 3 en el codigo arriba causa un error en tiempo de compilacion por tratar de asignar un valor a una variable no mutable. De esta manera el compilador garantiza que cuando defines que un valor no va a cambiar, efectivamente no cambie.  Pero la mutabilidad es muy util cuando se opera con estructuras de datos grandes, ya que es mas rapido cambiar los valores en el mismo lugar que estar copiando toda la estructura y alojando en memoria nuevas instancias cada vez.
+
+#### Shadowing
+Existe una forma de declarar una variable nueva con el mismo nombre y usando el mismo valor que una previa.  De esta manera se dice que la nueva variable emerge de la sombra de la primera (shadows).
+<iframe height="400px" width="100%" src="https://repl.it/repls/FrivolousSnoopyVirtualmemory?lite=true" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+
+El programa primero enlaza `val` al valor `4` y luego emerge de su sombra al hacer `let val = val ...` tomando el valor original y agregando `5`.
+
+Con `mut` el compilador sabe que una variable sera mutable en todo su ciclo de vida.  _Shadowing_ puede definir una serie de transformaciones sobre los valores de la variable pero al final de estas se mantiene como no mutable.
+
+Otra ventaja sobre `mut` es que con _Shadowing_ el tipo de dato en dicha transformacion.
+<iframe height="400px" width="100%" src="https://repl.it/repls/DeeppinkOrdinaryCertifications?lite=true" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+
+### Constantes
+A diferencia de las variables, las constantes _siempre son no mutables_ y deben ser anotadas con su tipo implicitamente.  Se definen solamente a traves de expresiones de constante como abajo y no como resultado de una llamada a una funcion, esto es, que no podrian ser definidas en tiempo de ejecucion.
+
+```
+const MAX_RESULTS_PER_REQUEST: u32 = 100_000;
+```
+
+La convencion para nombres de constantes es de usar solo mayusculas y subrayados entre palabras.  _El subrayado en numeros es para mejorar la legibilidad de estos pero no agrega ninguna funcionalidad._
+
+Las constantes son validas por el tiempo en que se ejecuta el programa y dentro del alcance (scope) en el que fueron declaradas.
 
 ### Result
 Muchas funciones de I/O devuelven un tipo de dato (enum) [Result](https://doc.rust-lang.org/nightly/std/result/enum.Result.html) que se usa para retornar y propagar errores.  Sus variantes son Ok para cuando la operacion es exitosa y Err representando un error y su valor.
