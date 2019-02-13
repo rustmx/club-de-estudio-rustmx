@@ -6,7 +6,18 @@ class: center, middle
 
 ---
 
-## Requisitos
+# Instalación de Rust y requisitos
+
+La forma recomendada para instalar *Rust* es hacerlo mediante _rustup_.
+
+>>>```curl https://sh.rustup.rs -sSf | sh```
+
+_rustup_ es la herramienta para manejar Rust y el proceso antes realizado instala
+también _rustc_ y _cargo_.
+
+Cabe señalar que el método antes mencionado es solo para sistemas *Nix. Si tú
+tienes Windows debes seguir las instrucciones listadas en la siguiente página:
+https://forge.rust-lang.org/other-installation-methods.html
 
 Esta sesion asume que se ha instalado Rust, Cargo y otras herramientas mencionadas en el [Get-Started](https://www.rust-lang.org/learn/get-started) de la pagina oficial de Rust.
 
