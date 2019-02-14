@@ -47,7 +47,7 @@ Como un repaso vale la pena mencionar que **Cargo** es una herramienta construir
 - Generar un proyecto nuevo `cargo new {nombre-proyecto}` 
 ```
 nombre-proyecto
-|- Cargo.toml <- el manifiesto donde se indica metadata y dependencias - https://github.com/toml-lang/toml
+|- Cargo.toml <- metadata y dependencias - https://github.com/toml-lang/toml
 |- src
   |- main.rs  <- el codigo
 ```
@@ -74,6 +74,7 @@ use ferris_says::say;
 
 _Cuando se importan nuevos crates a un proyecto hay que compilarlo nuevamente._
 
+---
 ### Variables
 Las variables son referencias a los datos en memoria.  Se usa `let` para su creacion.  Las variables no mutan por defecto, para cambiar esto se usa `mut`.
 ```
@@ -86,6 +87,7 @@ La sintaxis `::new` indica que `new` es una funcion asociada al tipo de dato `St
 
 La linea 3 en el codigo arriba causa un error en tiempo de compilacion por tratar de asignar un valor a una variable no mutable. De esta manera el compilador garantiza que cuando defines que un valor no va a cambiar, efectivamente no cambie.  Pero la mutabilidad es muy util cuando se opera con estructuras de datos grandes, ya que es mas rapido cambiar los valores en el mismo lugar que estar copiando toda la estructura y alojando en memoria nuevas instancias cada vez.
 
+---
 #### Shadowing
 Existe una forma de declarar una variable nueva con el mismo nombre y usando el mismo valor que una previa.  De esta manera se dice que la nueva variable emerge de la sombra de la primera (shadows).
 ```
@@ -109,6 +111,7 @@ Otra ventaja sobre `mut` es que con _Shadowing_ el tipo de dato en dicha transfo
 ```
 [Intentalo](https://repl.it/@wdonet/shadowing-mut)
 
+---
 ### Constantes
 A diferencia de las variables, las constantes _siempre son no mutables_ y deben ser anotadas con su tipo explicitamente.  Se definen solamente a traves de expresiones de constante como abajo y no como resultado de una llamada a una funcion, esto es, que no podrian ser definidas en tiempo de ejecucion.
 
@@ -120,19 +123,20 @@ La convencion para nombres de constantes es de usar solo mayusculas y subrayados
 
 Las constantes son validas por el tiempo en que se ejecuta el programa y dentro del alcance (scope) en el que fueron declaradas.
 
+---
 ### Result
 Muchas funciones de I/O devuelven un tipo de dato (enum) [Result](https://doc.rust-lang.org/nightly/std/result/enum.Result.html) que se usa para retornar y propagar errores.  Sus variantes son Ok para cuando la operacion es exitosa y Err representando un error y su valor.
 
 `Result` es una buena solucion para recuperarse de errores que usan la macro [panic!](https://doc.rust-lang.org/std/macro.panic.html). **Panic** es el termino que Rust usa cuando un programa termina con error.
 
 ---
-
 ## Tipos de datos
 Rust debe saber el tipo de datos de cada variable en tiempo de compilacion para saber como operar.  Sin embargo puede _inferir_ el tipo basado en el valor y en como se utiliza.
 
 ### Tipos Escalares
 Representan un valor simple de 4 posibles: entero, punto flotante, logico y caracter.
 
+---
 #### Entero
 Se define con una `i` (con signo +/-) o `u` (sin signo) seguido del numero de bits de espacio en memoria requeridos. Cada variante con signo puede almancenar numeros en el rango de `-2^(n-1)` a `2^(n-1) - 1` y las variantes sin signo en un rango de `0` a `2^(n) - 1`.
 
@@ -149,6 +153,7 @@ Si quieres depender de la arquitectura de la computadora usa `isize` y `usize`. 
 
 Si llegas al limite del rango de un tipo, por ejemplo una variable tipo `u8` con valor `255` y quieras cambiarlo a `256` - esto se llama **Integer Overflow** - el cual provoca que el compilador cause una señal de panico en modo debug.  De otro modo, Rust hace algo llamado **two's complement wrapping** que significa hacer el `256` en `0`, el `257` en `1` y asi sucesivamente.
 
+---
 #### Punto flotante
 Solo existen dos siguiendo la misma nomenclatura que para enteros: `f32` y `f64` (default por ser mas preciso y casi de la misma velocidad).
 
@@ -164,6 +169,7 @@ let f: bool = false;
 #### Caracter
 Este es especificado con un caracter en comillas simples `'😻'`.  Representa un valor escalar Unicode por lo que puede representar mas caracteres del codigo ASCII como caracteres Chinos, Japoneses, Koreanos o emojis.  Su rango de valores va de `U+0000` a `U+D7FF` y `U+E000` a `U+10FFFF`.
 
+---
 ### Tipos Compuestos
 Rust cuenta con dos tipos de dato compuestos y primitivos que pueden agrupar multiples valores.
 
@@ -183,6 +189,7 @@ Son una forma de agrupar valores de tipos de dato distintos.  Son de tamaño fij
 ```
 [Intentalo](https://repl.it/@wdonet/rust-tuples)
 
+---
 #### Arreglos
 En este caso todos los elementos deben ser del mismo tipo.  Son de tamaño fijo, sus valores tambien se separan por comas dentro de corchetes.  Son utiles cuando se quiere tener los datos en el `Stack` en lugar del `Heap`.  Un `vector` es una coleccion similar que puede crecer en tamaño.
 
@@ -200,7 +207,6 @@ Para acceder a elementos especificos se usan `[]` con el indice del elemento. In
 [Intentalo](https://repl.it/@wdonet/rust-arrays)
 
 ---
-
 ## Estructuras de control
 El objetivo de estas es decidir que codigo ejecutar y si hacerlo repetidamente mientras una serie de condiciones se cumplen.
 
@@ -218,6 +224,7 @@ Si la condicion _(debe ser logica o de tipo `bool`)_ se cumple la condicion desp
   }
 ```
 
+---
 Como `if` es una expresion, tambien se puede utilizar a la derecha de `let` como un valor.  _En este caso ambos valores deben ser del mismo tipo de dato._
 ```
   let estatus = if grados > 5 {
@@ -246,6 +253,7 @@ Pero usar multiples `else-if` puede hacer el codigo ilegible, para esos casos se
     }
 ```
 
+---
 ### Ciclos
 El proposito es ejecutar un bloque de codigo mas de una vez.
 
@@ -253,7 +261,9 @@ El proposito es ejecutar un bloque de codigo mas de una vez.
 |:-------:|:------:|:--------:|
 | Ejecuta el codigo por siempre o hasta que se termine manualmente (`^C`). | Ejecuta el codigo siempre que la condicion se cumpla. | Usual para recorrer elementos de un tipo de dato compuesto como un arreglo o tupla.  Tambien se suele usar con rangos `(1..4)`. |
 
-Ejemplos:
+---
+
+#### Ejemplos:
 ```
   /* Loop */
   let mut counter = 10;
@@ -282,6 +292,7 @@ Ejemplos:
   println!("For terminado");
 ```
 
+---
 Utilizando un [rango](https://doc.rust-lang.org/std/ops/struct.Range.html) `(1..4)` como en:
 ```
   for number in (1..7).rev() {
@@ -295,7 +306,6 @@ _**Note : ** Se puede usar `break` en cualquier ciclo para dar por terminada su 
 [Intentalo](https://repl.it/@wdonet/rust-control-loops)
 
 ---
-
 _Puedes acceder a mas documentos directamente en tu local ejecutando `rustup doc`_
 
 Ahora vamos al primer [laboratorio](ejercicios/lab-01)
