@@ -231,6 +231,20 @@ Como `if` es una expresion, tambien se puede utilizar a la derecha de `let` como
 
 Pero usar multiples `else-if` puede hacer el codigo ilegible, para esos casos se puede usar `match`.
 
+```
+  let grados = 13;
+  match grados {
+        // Empatar un simple valor
+        1 => println!("frio!"),
+        // o varios valores
+        2 | 3 | 5 | 7 => println!("tibio"),
+        // o un rango
+        13...19 => println!("caliente"),
+        // En cualquier otro caso
+        _ => println!("Temperatura {}", grados),
+    }
+```
+
 ### Ciclos
 El proposito es ejecutar un bloque de codigo mas de una vez.
 
@@ -267,7 +281,15 @@ Ejemplos:
   println!("For terminado");
 ```
 
-_**Note : ** Se puede usar `break` en cualquiera para dar por terminada la ejecucion del ciclo._
+Utilizando un [rango](https://doc.rust-lang.org/std/ops/struct.Range.html) `(1..4)` como en:
+```
+  for number in (1..7).rev() {
+    println!("Numero {}", number);
+  }
+```
+Los rangos incluyen el numero del inicio pero no el numero del tope final.
+
+_**Note : ** Se puede usar `break` en cualquier ciclo para dar por terminada su ejecucion._
 
 [Intentalo](https://repl.it/@wdonet/rust-control-loops)
 
