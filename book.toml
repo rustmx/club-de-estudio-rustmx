@@ -1,5 +1,5 @@
 [book]
-authors = ["VentGrey"]
+authors = ["Oswaldo Herrera", "Maricela Sánchez"]
 multilingual = false
 src = "src"
-title = "Club de Estudio"
+title = "Club de Estudio RustMX"
