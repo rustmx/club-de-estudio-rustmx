@@ -33,7 +33,6 @@ https://forge.rust-lang.org/other-installation-methods.html
 Tambien es recomendable que sigas las instrucciones del [Get-Started](https://www.rust-lang.org/learn/get-started) en la pagina oficial para tener Rust, Cargo y otras herramientas utiles.
 
 ---
-
 ## Conceptos basicos
 
 ### Compilar y ejecutar
@@ -41,6 +40,7 @@ El codigo suele estar dentro de archivos `.rs` y similar a C o C++, se usa:
 1. Un comando para compilar `rustc file.rs` genera un ejecutable `file` _(o file.exe en windows)_
 2. Resta solo ejecutarlo `./file` _(o file.exe en windows)_
 
+---
 ### Cargo
 Como un repaso vale la pena mencionar que **Cargo** es una herramienta construir el projecto en Rust y administrador de paquetes.  Por tanto para:
 
@@ -58,6 +58,7 @@ nombre-proyecto
 - Generar documentos `cargo doc` 
 - Publicar una libreria en [crates.io](https://crates.io/) `cargo publish`
 
+---
 ### Dependencias
 Las librerias se encuentras en [crates.io](https://crates.io/), el cual es el registro de paquetes para Rust.  Dichos paquetes se llaman **"crates"**.
 
