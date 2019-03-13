@@ -14,11 +14,6 @@ impl Rectangulo {
 }
 
 fn main() {
-    let cuadrado_1 = Rectangulo {
-        largo: 3,
-        ancho: 3
-    };
-
     let cuadrado_2 = Rectangulo::cuadrado(3); 
     println!("El área del rectangulo es {}",cuadrado_2.area());
     println!("Rectangulo cuadrado: {:?}",cuadrado_2);
