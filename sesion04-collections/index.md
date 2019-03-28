@@ -282,7 +282,7 @@ Nota: En los Hash Maps, al igual que con los vectores, se requiere que los valor
 
 ---
 
-[Ejemplo 3.3. Obtener el valor de un Hash Map usando la clave](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=8a833b3abdc2bbade60d19a23acee027)
+[Ejemplo 3.3. Obtener el valor de un Hash Map usando la clave](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=85bd93cd908c2e22cb46e466f2bd2b8e)
 ```rust
 use std::collections::HashMap;
 
@@ -296,7 +296,7 @@ fn main() {
     let el_valor = valoraciones.get(&la_clave);
     
     match el_valor {
-        Some(x) => println!("La valoración de {} es {:?}%.", la_clave, x),
+        Some(x) => println!("La valoración de {} es {}%.", la_clave, x),
         None => println!("No tenemos una valoración para {}.", la_clave),
     }
 }
