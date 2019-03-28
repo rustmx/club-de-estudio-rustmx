@@ -1,5 +1,3 @@
-class: center, middle
-
 <img src="../assets/images/rustmx-logo.svg" alt="RustMX" width="250rem" height="auto">
 
 # Sesión 1: Conceptos básicos, tipos de datos, estructuras de control
@@ -77,7 +75,7 @@ _Cuando se importan nuevos crates a un proyecto hay que compilarlo nuevamente._
 ---
 ### Variables
 Las variables son referencias a los datos en memoria.  Se usa `let` para su creacion.  Las variables no mutan por defecto, para cambiar esto se usa `mut`.
-```
+```rust
 let foo = 5; // no mutable
 let mut bar = String::new(); // mutable
 foo = 6; // error en tiempo de compilacion
@@ -90,7 +88,7 @@ La linea 3 en el codigo arriba causa un error en tiempo de compilacion por trata
 ---
 #### Shadowing
 Existe una forma de declarar una variable nueva con el mismo nombre y usando el mismo valor que una previa.  De esta manera se dice que la nueva variable emerge de la sombra de la primera (shadows).
-```
+```rust
   let val = 4;
   let val = val + 5;
   println!("The value is {}", val);
@@ -102,7 +100,7 @@ El programa primero enlaza `val` al valor `4` y luego emerge de su sombra al hac
 Con `mut` el compilador sabe que una variable sera mutable en todo su ciclo de vida.  _Shadowing_ puede definir una serie de transformaciones sobre los valores de la variable pero al final de estas se mantiene como no mutable.
 
 Otra ventaja sobre `mut` es que con _Shadowing_ el tipo de dato en dicha transformacion.
-```
+```rust
   let spaces = "   ";
   let spaces = spaces.len();
   println!("Total spaces {}", spaces);
@@ -115,7 +113,7 @@ Otra ventaja sobre `mut` es que con _Shadowing_ el tipo de dato en dicha transfo
 ### Constantes
 A diferencia de las variables, las constantes _siempre son no mutables_ y deben ser anotadas con su tipo explicitamente.  Se definen solamente a traves de expresiones de constante como abajo y no como resultado de una llamada a una funcion, esto es, que no podrian ser definidas en tiempo de ejecucion.
 
-```
+```rust
 const MAX_RESULTS_PER_REQUEST: u32 = 100_000;
 ```
 
@@ -161,7 +159,7 @@ Solo existen dos siguiendo la misma nomenclatura que para enteros: `f32` y `f64`
 
 #### Logico
 Se usa la palabra reservada `bool` y es de tamaño de un bit. Se puede especificar con las palabras `true` y `false` como valores.
-```
+```rust
 let t = true;
 let f: bool = false;
 ```
@@ -175,7 +173,7 @@ Rust cuenta con dos tipos de dato compuestos y primitivos que pueden agrupar mul
 
 #### Tuplas
 Son una forma de agrupar valores de tipos de dato distintos.  Son de tamaño fijo, se crean escribiendo una lista de valores separados por coma y entre parentesis.  Cada posicion tiene un tipo de dato.  Para acceder a los valores de una tupla se puede usar **pattern matching** a traves de `destructuring` o con el nombre de la variable seguido de `.` y el indice del elemento (comenzando en cero).
-```
+```rust
   let tupla = (500, 9.3, 'z', "cadena");
   println!("Tupla {:?}", tupla);
   let (entero, flotante, caracter, cadena) = tupla;
@@ -196,7 +194,7 @@ En este caso todos los elementos deben ser del mismo tipo.  Son de tamaño fijo,
 Para indicar el tipo de un array se usan corchetes con dos elementos dentro, el primero es el tipo de dato para los elementos y separado por un `;` le sigue el total de elementos en el arreglo. Si esto no se indica, todo es inferido.
 
 Para acceder a elementos especificos se usan `[]` con el indice del elemento. Indice comienza en cero.
-```
+```rust
   let a = ["second", "minute", "hour", "day", "month", "year"];
   println!("Arreglo a {:?}", a);
   let b:[u8; 3] = [10, 20, 30];
@@ -213,7 +211,7 @@ El objetivo de estas es decidir que codigo ejecutar y si hacerlo repetidamente m
 ### Expresion `if`
 Si la condicion _(debe ser logica o de tipo `bool`)_ se cumple la condicion despues del `if`, ejecuta el bloque de codigo encerrado entre `{}`, de lo contrario ejecuta el bloque de codigo despues de `else`.
 
-```
+```rust
   let grados = 10;
   if grados > 30 {
     println!("Apagar estufa en 1 minuto!");
@@ -226,7 +224,7 @@ Si la condicion _(debe ser logica o de tipo `bool`)_ se cumple la condicion desp
 
 ---
 Como `if` es una expresion, tambien se puede utilizar a la derecha de `let` como un valor.  _En este caso ambos valores deben ser del mismo tipo de dato._
-```
+```rust
   let estatus = if grados > 5 {
     "caliente"
   } else {
@@ -239,7 +237,7 @@ Como `if` es una expresion, tambien se puede utilizar a la derecha de `let` como
 
 Pero usar multiples `else-if` puede hacer el codigo ilegible, para esos casos se puede usar `match`.
 
-```
+```rust
   let grados = 13;
   match grados {
         // Empatar un simple valor
@@ -264,7 +262,7 @@ El proposito es ejecutar un bloque de codigo mas de una vez.
 ---
 
 #### Ejemplos:
-```
+```rust
   /* Loop */
   let mut counter = 10;
   let status = loop {
@@ -294,14 +292,14 @@ El proposito es ejecutar un bloque de codigo mas de una vez.
 
 ---
 Utilizando un [rango](https://doc.rust-lang.org/std/ops/struct.Range.html) `(1..4)` como en:
-```
+```rust
   for number in (1..7).rev() {
     println!("Numero {}", number);
   }
 ```
 Los rangos incluyen el numero del inicio pero no el numero del tope final.
 
-_**Note : ** Se puede usar `break` en cualquier ciclo para dar por terminada su ejecucion._
+**Note:** Se puede usar `break` en cualquier ciclo para dar por terminada su ejecucion._
 
 [Intentalo](https://repl.it/@wdonet/rust-control-loops)
 
